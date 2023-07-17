@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -19,7 +20,25 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final FlightRepository flightRepository;
 
-    public List<ReviewEntity> getFlightReviews(FlightEntity flight) {
-     return flightRepository.findReviewIds(flight.getDeparture_from(), flight.getDestination(), flight.getDeparture_date());
+    public Optional<List<ReviewEntity>> getFlightReviews(FlightEntity flight) {
+
+        List<ReviewEntity> reviews = flightRepository.findReviewIds(
+                flight.getDeparture_from(),
+                flight.getDestination(),
+                flight.getDeparture_date());
+
+     return Optional.ofNullable(reviews);
+    }
+
+    public Optional<Integer> getAverageRating(FlightEntity flight) {
+
+        return Optional.of(flightRepository.findReviewIds(
+                flight.getDeparture_from(),
+                flight.getDestination(),
+                flight.getDeparture_date())
+                .stream()
+                .mapToInt(ReviewEntity::getReview_rating)
+                .sum());
+
     }
 }

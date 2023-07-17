@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/reviews")
 public class ReviewController {
@@ -23,9 +23,12 @@ public class ReviewController {
 
     @GetMapping("/flight-review")
     public Optional<List<ReviewEntity>> flightsReview(@RequestBody FlightEntity flight) {
-        return Optional.ofNullable(reviewService.getFlightReviews(flight));
+        return reviewService.getFlightReviews(flight);
     }
-
+    @PostMapping("/flight-average-rating")
+    public Optional<Integer> averageFlightRating(@RequestBody FlightEntity flight){
+        return reviewService.getAverageRating(flight);
+    }
 
 
 
