@@ -1,5 +1,4 @@
 package dev.airlines.system.airlines;
-
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +7,9 @@ public class AirlinesApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AirlinesApplication.class, args);
+
+
 	}
+
 
 }
