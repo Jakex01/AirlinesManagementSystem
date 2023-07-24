@@ -22,10 +22,26 @@ public FlightController(FlightService flightService) {
     public List<FlightEntity> getAllFlights() {
         return flightService.getAllFlights();
     }
+
+    @GetMapping("/specific-departure-flight")
+    public List<FlightEntity> findByDepartureFrom(@RequestParam("departure_from") String departure_from){
+        return flightService.findByDepartureFrom(departure_from);
+    }
+
     @GetMapping("/specific-flight")
     public Optional<List<FlightEntity>> getSpecificFlight(@RequestBody  FlightEntity flightName) {
         return Optional.ofNullable(flightService.getSpecificFlight(flightName));
     }
+    @PostMapping("/add-flight")
+    public void addFlight(@RequestBody FlightEntity flight){
+    flightService.addFlight(flight);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<FlightEntity> getFlightById(@PathVariable Long id) {
+        return flightService.getFlightById(id);
+    }
+
 
     }
 

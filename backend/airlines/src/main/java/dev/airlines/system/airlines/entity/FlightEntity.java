@@ -13,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 public class FlightEntity {
+
     @Id
     @Column(name="flight_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -35,12 +36,5 @@ public class FlightEntity {
     private int flight_time;
     @Column(name="average_rating")
     private double average_rating;
-    @ManyToOne
-    @JoinColumn(name="airplane_id")
-    private AirplaneEntity airplane;
-    @OneToMany(mappedBy="flight")
-    private List<ReviewEntity> review;
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private UserEntity user;
+
 }

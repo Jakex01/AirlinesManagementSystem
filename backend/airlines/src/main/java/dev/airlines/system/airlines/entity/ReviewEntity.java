@@ -20,12 +20,4 @@ public class ReviewEntity {
     private String review_body;
     @Column(name="review_Rating")
     private int review_rating;
-    @ManyToOne
-    @JoinColumn(name="user_id")
-    private UserEntity user;
-     @ManyToOne
-    @JoinColumn(name = "flight_id")
-    private FlightEntity flight;
-
-
 }

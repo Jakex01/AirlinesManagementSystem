@@ -6,39 +6,26 @@ import dev.airlines.system.airlines.model.Review;
 import dev.airlines.system.airlines.repository.FlightRepository;
 import dev.airlines.system.airlines.repository.ReviewRepository;
 import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@RequiredArgsConstructor
+
 @Service
 @Transactional
 public class ReviewService {
 
-    private final ReviewRepository reviewRepository;
+    public ReviewService(FlightRepository flightRepository) {
+        this.flightRepository = flightRepository;
+    }
+
     private final FlightRepository flightRepository;
 
-    public Optional<List<ReviewEntity>> getFlightReviews(FlightEntity flight) {
-
-        List<ReviewEntity> reviews = flightRepository.findReviewIds(
-                flight.getDeparture_from(),
-                flight.getDestination(),
-                flight.getDeparture_date());
-
-     return Optional.ofNullable(reviews);
+    public FlightEntity flight(){
+        return flightRepository.save(new FlightEntity());
     }
 
-    public Optional<Integer> getAverageRating(FlightEntity flight) {
-
-        return Optional.of(flightRepository.findReviewIds(
-                flight.getDeparture_from(),
-                flight.getDestination(),
-                flight.getDeparture_date())
-                .stream()
-                .mapToInt(ReviewEntity::getReview_rating)
-                .sum());
-
-    }
 }

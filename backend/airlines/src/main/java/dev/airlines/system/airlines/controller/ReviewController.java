@@ -20,7 +20,7 @@ public class ReviewController {
     }
 
 
-
+/*
     @GetMapping("/flight-review")
     public Optional<List<ReviewEntity>> flightsReview(@RequestBody FlightEntity flight) {
         return reviewService.getFlightReviews(flight);
@@ -30,6 +30,6 @@ public class ReviewController {
         return reviewService.getAverageRating(flight);
     }
 
-
+*/
 
 }

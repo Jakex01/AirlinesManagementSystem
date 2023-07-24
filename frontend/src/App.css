@@ -1,0 +1,86 @@
+/* App.css */
+:root {
+    --mainColor: #29335c;
+    --mainColorLight: #5767aa;
+    --secondaryColor: #db2b39;
+    --textColor: #eee;
+    --mainOpacity: rgba(0, 0, 0, 0.55);
+}
+.homepage-carousel-title {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+.main-color{
+    background-color: #29335c;
+    opacity: 1;
+}
+.main-color-for-flight{
+    background-color: #29335c;
+    opacity: 1;
+}
+.main-color-for-flight:hover{
+    background-color: #eee;
+    opacity: 1;
+}
+
+.col-image-left {
+    background-image: url("./images/PublicImages/flights.jpg");
+    height: 25em !important;
+}
+
+.col-image-right {
+    background-image: url("./images/PublicImages/flights.jpg");
+    height: 25em !important;
+}
+.navbar {
+    background-color: var(--mainColor);
+}
+
+.header {
+    background-image: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7) ), url("./images/PublicImages/flights.jpg");
+    opacity: var(--mainOpacity);
+    height: 25em !important;
+}
+
+.navbar-brand {
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.navbar-toggler {
+    border: none;
+}
+
+.navbar-toggler-icon {
+    background-image: url('data:image/svg+xml;charset=utf-8,%3Csvg viewBox="0 0 30 30" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath stroke="%23fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"%3E%3C/path%3E%3C/svg%3E');
+}
+
+.nav-item {
+    margin-right: 10px;
+}
+.nav-item1{
+margin-right: 50px;
+    padding-left: 0;
+}
+
+.nav-link {
+    color: #fff;
+    font-size: 1rem;
+}
+
+.nav-link:hover {
+    color: #ccc;
+}
+
+.btn-outline-light {
+
+    color: #fff;
+    border-color: #fff;
+}
+
+.btn-outline-light:hover {
+    background-color: #fff;
+    color: #333;
+}
+

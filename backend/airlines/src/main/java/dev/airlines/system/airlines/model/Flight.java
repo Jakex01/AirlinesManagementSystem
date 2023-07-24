@@ -20,6 +20,4 @@ public class Flight {
     private String  departure_date;
     private int flight_time;
     private double average_rating;
-    private Airplane airplane;
-    private Review review;
 }
