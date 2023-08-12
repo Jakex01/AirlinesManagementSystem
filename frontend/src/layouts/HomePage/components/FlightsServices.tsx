@@ -1,4 +1,11 @@
+import {useOktaAuth} from "@okta/okta-react";
+import {Link} from "react-router-dom";
+
 export const FlightsServices = () => {
+
+    const {authState} = useOktaAuth();
+
+
     return(
 
         <div className='container my-5'>
@@ -12,9 +19,11 @@ export const FlightsServices = () => {
                         please contact us via email!
                     </p>
                     <div className='d-grid gap-2 justify-content-md-start mb-4 mb-lg-3'>
-                        <a href='#' className='btn main-color btn-lg text-white'>
-                            Sign up
-                        </a>
+                        {authState?.isAuthenticated ?
+                            <Link className='button main-color btn-lg text-white' to='/flights'>Explore top flights</Link>
+                            :
+                            <Link className='button main-color btn-lg text-white' to='/login'>Sign up</Link>
+                        }
                     </div>
                 </div>
                 <div className='col-lg-4 offset-lg-1 shadow-lg lost-image'></div>

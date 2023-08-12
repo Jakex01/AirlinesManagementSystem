@@ -1,5 +1,6 @@
 import React from "react";
 import FlightModel from "../../../models/FlightModel";
+import {Link} from "react-router-dom";
 export const ReturnFlight: React.FC<{flight: FlightModel}> = (props) =>{
 
 return(
@@ -15,7 +16,7 @@ return(
                 {props.flight.destination}
                    </h6>
             <p>{props.flight.departure_from}</p>
-            <a className='btn main-color text-white' href="#">Reserved</a>
+            <Link className='btn main-color text-white' to={`/checkout/${props.flight.flight_id}`}>Reserved</Link>
         </div>
     </div>
 );

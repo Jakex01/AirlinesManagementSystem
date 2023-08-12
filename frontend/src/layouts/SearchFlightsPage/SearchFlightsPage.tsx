@@ -3,8 +3,11 @@ import FlightModel from "../../models/FlightModel";
 import {SpinnerLoading} from "../Utils/SpinnerLoading";
 import {SearchFlight} from "./Components/SearchFlight";
 import {Pagination} from "../Utils/Pagination";
+import {useOktaAuth} from "@okta/okta-react";
 
 export const SearchFlightsPage = () => {
+
+    const {authState} = useOktaAuth();
 
     const [flights, setFlights] = useState<FlightModel[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -16,9 +19,10 @@ export const SearchFlightsPage = () => {
     const [search, setSearch] = useState('');
      const [searchUrl, setSearchUrl] = useState('');
 
+
     useEffect(() => {
         const fetchFlights = async () => {
-            const baseUrl: string = "http://localhost:8080/api/v1/flights";
+            const baseUrl: string = "http://localhost:8080/api/v1/flights/secure";
             let url: string;
         if(searchUrl === ''){
             url = baseUrl + '/all';
@@ -26,10 +30,16 @@ export const SearchFlightsPage = () => {
             url =baseUrl + searchUrl;
         }
 
-
+            const requestOptions = {
+                method: 'GET',
+                headers: {
+                    Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+                    'Content-Type': 'application/json'
+                }
+            };
 
             try {
-                const response = await fetch(url);
+                const response = await fetch(url,requestOptions);
 
                 if (!response.ok) {
                     throw new Error("Something went wrong!");
@@ -78,7 +88,6 @@ export const SearchFlightsPage = () => {
         if(search === ''){
             setSearchUrl('/all');
         }else{
-            console.log("tu jestem");
             setSearchUrl(`/specific-departure-flight?departure_from=${search}`);
 
         }

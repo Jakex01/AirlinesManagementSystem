@@ -5,18 +5,33 @@ import flightModel from "../../../models/FlightModel";
 import {Simulate} from "react-dom/test-utils";
 import load = Simulate.load;
 import {SpinnerLoading} from "../../Utils/SpinnerLoading";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {useOktaAuth} from "@okta/okta-react";
 export const Carousel = () => {
+    const {authState} = useOktaAuth();
     const [flights, setFlights] = useState<FlightModel[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [httpError, setHttpError] = useState<string | null>(null);
 
+    const navigate = useNavigate();
+    const customAuthHandler = () => {
+        navigate('/search');
+    };
+
+    const requestOptions = {
+
+        method: 'GET',
+        headers: {
+            Authorization: `Bearer ${authState?.accessToken?.accessToken}`,
+            'Content-Type': 'application/json'
+        }
+    };
     useEffect(() => {
         const fetchFlights = async () => {
-            const baseUrl: string = "http://localhost:8080/api/v1/flights/all";
+            const baseUrl: string = "http://localhost:8080/api/v1/flights/secure/all";
 
             try {
-                const response = await fetch(baseUrl);
+                const response = await fetch(baseUrl,requestOptions);
 
                 if (!response.ok) {
                     throw new Error("Something went wrong!");
@@ -24,7 +39,7 @@ export const Carousel = () => {
 
                 const responseJson = await response.json();
                 const responseData = responseJson; // there is correct data returned from API
-                console.log(responseData);
+
                 if (responseData) {
                     const loadedFlights: FlightModel[] = responseData.map((flight: any) => ({
                         flight_id: flight.id,
@@ -119,7 +134,7 @@ export const Carousel = () => {
                     </div>
                 </div>
                 <div className='homepage-carousel-title mt-3'>
-                    <Link className='btn btn-outline-secondary btn-lg' to='search'>View more</Link>
+                    <button className='btn btn-outline-secondary btn-lg' onClick={customAuthHandler}>View more</button>
                 </div>
             </div>
     );

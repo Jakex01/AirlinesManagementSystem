@@ -15,5 +15,8 @@ public interface FlightRepository extends JpaRepository<FlightEntity, Long> {
 
     @Query("SELECT f FROM FlightEntity f WHERE f.departure_from LIKE %:departure_from%")
     List<FlightEntity> findByDepartureFromContaining(@Param("departure_from") String departure_from);
+
+    @Query("SELECT f FROM FlightEntity f WHERE  f.id in :flight_ids")
+    List<FlightEntity> findFlightsByFlightIds(@Param("flight_ids") List<Long> flightIds);
 }
 

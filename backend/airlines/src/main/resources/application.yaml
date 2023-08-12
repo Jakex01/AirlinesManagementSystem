@@ -34,3 +34,7 @@ spring:
           connectiontimeout: 5000
           timeout: 3000
           writetimeout: 5000
+okta:
+  oauth2:
+    client-id: 0oaalew55wzktJlCC5d7
+    issuer: https://dev-53177510.okta.com/oauth2/default
